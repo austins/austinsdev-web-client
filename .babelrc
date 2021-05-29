@@ -1,0 +1,28 @@
+{
+    "presets": ["next/babel"],
+    "plugins": [
+        ["prismjs", {
+            "languages": [
+                "js",
+                "css",
+                "html",
+                "aspnet",
+                "c",
+                "csharp",
+                "git",
+                "php",
+                "json",
+                "nginx",
+                "mongodb",
+                "powershell",
+                "scss",
+                "sql",
+                "vbnet",
+                "vb"
+            ],
+            "plugins": ["show-language"],
+            "theme": "default",
+            "css": true
+        }]
+    ]
+}

@@ -1,0 +1,14 @@
+.projectCard {
+    &:last-child {
+        border-bottom: 0 !important;
+    }
+}
+
+.projectThumbnail {
+    object-fit: cover;
+    height: 145px !important;
+}
+
+.projectTag {
+    margin-bottom: 0.2rem;
+}

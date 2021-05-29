@@ -1,0 +1,13 @@
+@import 'node_modules/bootswatch/dist/litera/variables';
+
+.navbarBackgroundColor {
+    background-color: $dark !important;
+}
+
+.logoImage {
+    max-height: 32px;
+}
+
+.searchInput {
+    max-width: 152px;
+}

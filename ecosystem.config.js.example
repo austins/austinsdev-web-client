@@ -1,0 +1,17 @@
+module.exports = {
+    apps: [
+        {
+            name: 'austinsdev-web-client',
+            script: 'npm',
+            args: 'start',
+            env: {
+                NODE_ENV: 'production',
+                PORT: 5000,
+                API_GRAPHQL_URL: '',
+                NEXT_PUBLIC_GOOGLE_ANALYTICS_TRACKING_ID: '',
+            },
+            instances: 2,
+            exec_mode: 'cluster',
+        },
+    ],
+};

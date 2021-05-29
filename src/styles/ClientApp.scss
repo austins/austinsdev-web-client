@@ -1,0 +1,110 @@
+@import 'node_modules/bootswatch/dist/litera/variables';
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&Roboto+Condensed&display=swap');
+$font-family-sans-serif: 'Open Sans', $font-family-sans-serif;
+$font-family-serif: $font-family-sans-serif;
+$headings-font-family: 'Roboto Condensed', $font-family-sans-serif;
+$headings-font-weight: 500;
+
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootswatch/dist/litera/bootswatch';
+
+#main {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+#main-inner {
+    flex: 1;
+}
+
+#main-inner img {
+    max-width: 100%;
+    height: auto;
+    border-radius: $border-radius;
+}
+
+#footer {
+    margin-top: 50px;
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+    background-color: $light;
+}
+
+h1 {
+    @extend .mb-3;
+}
+
+span[class*=simple-icon-] {
+    display: inline-block;
+    margin: 8px 10px 4px 0;
+}
+
+pre {
+    background: theme-color("light");
+    border: 1px solid theme-color("secondary");
+    border-radius: $border-radius;
+    margin: .5em 0 1em !important;
+    max-width: 100%;
+    overflow: auto;
+    padding: 1em !important;
+    font-size: .9em !important;
+    line-height: 1.5;
+}
+
+figure.is-type-video.wp-embed-aspect-16-9 .wp-block-embed__wrapper {
+    @extend .embed-responsive;
+    &:before {
+        padding-top: 56.25%;
+    }
+}
+
+figure.is-type-video.wp-embed-aspect-16-9 .wp-block-embed__wrapper > iframe {
+    @extend .embed-responsive-item;
+}
+
+.blocks-gallery-grid {
+    padding-left: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.wp-block-gallery .blocks-gallery-item {
+    list-style: none;
+    margin-right: 1rem;
+}
+
+.blocks-gallery-item__caption {
+    @extend .text-muted;
+    text-align: center;
+    font-style: italic;
+}
+
+.alignleft, .alignright {
+    display: block
+}
+
+.alignleft {
+    float: left;
+    margin: 0 1.3rem 1rem 0
+}
+
+.aligncenter {
+    margin: 0 auto 1rem;
+    display: table
+}
+
+.alignright {
+    float: right;
+    margin: 0 0 1rem 1.3rem
+}
+
+@include media-breakpoint-down(sm) {
+    .alignleft,
+    .aligncenter,
+    .alignright {
+        margin: 0 0 1rem !important;
+        float: none !important
+    }
+}

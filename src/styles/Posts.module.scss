@@ -1,0 +1,56 @@
+@import 'node_modules/bootswatch/dist/litera/variables';
+@import "node_modules/bootstrap/scss/functions";
+@import 'node_modules/bootstrap/scss/variables';
+@import 'node_modules/bootstrap/scss/mixins/breakpoints';
+
+.postCard {
+    position: relative;
+    top: 0;
+    transition: all ease-in-out 0.1s;
+    margin-bottom: 2rem !important;
+
+    &:hover {
+        cursor: pointer;
+        top: -4px;
+        border-color: $primary;
+    }
+
+    @include media-breakpoint-up(sm) {
+        min-width: 240px;
+        max-width: 240px;
+    }
+
+    @include media-breakpoint-only(md) {
+        min-width: 330px;
+        max-width: 330px;
+    }
+
+    @include media-breakpoint-only(lg) {
+        min-width: 290px;
+        max-width: 290px;
+    }
+
+    @include media-breakpoint-only(xl) {
+        min-width: 350px;
+        max-width: 350px;
+    }
+}
+
+.postThumbnail {
+    max-height: 200px;
+    border-radius: 0 !important;
+    object-fit: cover;
+}
+
+.postMeta {
+    color: $text-muted;
+    font-size: $small-font-size;
+
+    span {
+        margin-right: 10px;
+    }
+
+    span > svg {
+        margin-right: 4px;
+    }
+}
