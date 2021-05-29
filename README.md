@@ -19,7 +19,7 @@ Pages are statically rendered at build-time except for the search page. They may
 
 ## Deployment
 
-For a self-hosted server, it should be configured with Linux, Node.js (LTS) with [pm2](https://github.com/Unitech/pm2) installed, and [webhook](https://github.com/adnanh/webhook).
+For a self-hosted server, it should be configured with Linux, [Node.js (LTS)](https://github.com/nodesource/distributions/blob/master/README.md) with [pm2](https://github.com/Unitech/pm2) installed, and [webhook](https://github.com/adnanh/webhook).
 - After cloning the repo onto the server, run `npm install` and then create an `ecosystem.config.js` file (see the provided example file) with the environment variables set. Run `pm2 start ecosystem.config.js` to start the app with load-balancing. The server can be configured to auto-start the app.
 - webhook must be set up to run a script to run `git pull && npm run build && pm2 reload austinsdev-web-client`.
 
