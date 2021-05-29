@@ -44,8 +44,8 @@ export default function Post({ post, slug, year }) {
                     <div className={styles.postMeta}>
                         <span>
                             <FontAwesomeIcon icon={faTag} />
-                            <Link href={`/articles/topic/${post.categories.nodes[0].slug}`}>
-                                {post.categories.nodes[0].name}
+                            <Link href={`/articles/topic/${post.categories.nodes[0].slug}`} passHref>
+                                <a>{post.categories.nodes[0].name}</a>
                             </Link>
                         </span>
 
@@ -61,7 +61,9 @@ export default function Post({ post, slug, year }) {
 
                         <span>
                             <FontAwesomeIcon icon={faUser} />
-                            <Link href={`/articles/author/${post.author.node.slug}`}>{post.author.node.name}</Link>
+                            <Link href={`/articles/author/${post.author.node.slug}`} passHref>
+                                <a>{post.author.node.name}</a>
+                            </Link>
                         </span>
 
                         <span>
@@ -107,20 +109,22 @@ export default function Post({ post, slug, year }) {
                         <div>
                             <h4>About the Author</h4>
                             <Media>
-                                <Link href={`/articles/author/${post.author.node.slug}`}>
-                                    <img
-                                        src={post.author.node.avatar.url}
-                                        width={post.author.node.avatar.width}
-                                        height={post.author.node.avatar.height}
-                                        alt={post.author.node.name}
-                                        className={`mr-2 ${styles.authorAvatar}`}
-                                    />
+                                <Link href={`/articles/author/${post.author.node.slug}`} passHref>
+                                    <a>
+                                        <img
+                                            src={post.author.node.avatar.url}
+                                            width={post.author.node.avatar.width}
+                                            height={post.author.node.avatar.height}
+                                            alt={post.author.node.name}
+                                            className={`mr-2 ${styles.authorAvatar}`}
+                                        />
+                                    </a>
                                 </Link>
 
                                 <Media.Body>
                                     <h5 className="mt-0">
-                                        <Link href={`/articles/author/${post.author.node.slug}`}>
-                                            {post.author.node.name}
+                                        <Link href={`/articles/author/${post.author.node.slug}`} passHref>
+                                            <a>{post.author.node.name}</a>
                                         </Link>
                                     </h5>
 

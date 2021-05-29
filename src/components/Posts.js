@@ -19,8 +19,8 @@ export default function Posts({ authorName, categoryName, posts, search }) {
                     const link = `/article/${date.getUTCFullYear()}/${post.slug}`;
 
                     return (
-                        <Fragment key={post.id}>
-                            <Link href={link}>
+                        <Link key={post.id} href={link} passHref>
+                            <a className={styles.postCardLink}>
                                 <Card className={styles.postCard}>
                                     {post.featuredImage && (
                                         <Card.Img
@@ -57,8 +57,8 @@ export default function Posts({ authorName, categoryName, posts, search }) {
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
-                            </Link>
-                        </Fragment>
+                            </a>
+                        </Link>
                     );
                 })}
             </CardDeck>

@@ -29,13 +29,13 @@ export default function PostsPager({ authorSlug, categorySlug, hasMore, hasPrevi
             {(hasMore || hasPrevious) && (
                 <nav className={styles.pagination}>
                     <ButtonGroup>
-                        <Link href={paths.hasMorePath}>
+                        <Link href={paths.hasMorePath} passHref>
                             <Button disabled={!hasMore} variant={hasMore ? 'primary' : 'outline-secondary'}>
                                 Older
                             </Button>
                         </Link>
 
-                        <Link href={paths.hasPreviousPath}>
+                        <Link href={paths.hasPreviousPath} passHref>
                             <Button disabled={!hasPrevious} variant={hasPrevious ? 'primary' : 'outline-secondary'}>
                                 Newer
                             </Button>
