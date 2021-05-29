@@ -10,8 +10,10 @@ export default function Page({ page, slug, projects }) {
 
             <h1>{page.title}</h1>
 
-            {/* eslint-disable-next-line react/no-danger */}
-            <div dangerouslySetInnerHTML={{ __html: page.content }} />
+            <div className="clearfix">
+                {/* eslint-disable-next-line react/no-danger */}
+                <div dangerouslySetInnerHTML={{ __html: page.content }} />
+            </div>
 
             {slug === 'portfolio' && projects && <Projects projects={projects} />}
         </div>

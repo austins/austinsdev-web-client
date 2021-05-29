@@ -76,33 +76,35 @@ export default function Post({ post, slug, year }) {
                     </div>
                 </header>
 
-                <SRLWrapper
-                    options={{
-                        settings: {
-                            autoplaySpeed: 0,
-                            disableKeyboardControls: true,
-                            disableWheelControls: true,
-                            disablePanzoom: true,
-                        },
-                        buttons: {
-                            showAutoplayButton: false,
-                            showDownloadButton: false,
-                            showFullscreenButton: false,
-                            showNextButton: false,
-                            showPrevButton: false,
-                            showThumbnailsButton: false,
-                        },
-                        caption: {
-                            showCaption: false,
-                        },
-                        thumbnails: {
-                            showThumbnails: false,
-                        },
-                    }}
-                >
-                    {/* eslint-disable-next-line react/no-danger */}
-                    <div dangerouslySetInnerHTML={{ __html: post.content }} />
-                </SRLWrapper>
+                <div className="clearfix">
+                    <SRLWrapper
+                        options={{
+                            settings: {
+                                autoplaySpeed: 0,
+                                disableKeyboardControls: true,
+                                disableWheelControls: true,
+                                disablePanzoom: true,
+                            },
+                            buttons: {
+                                showAutoplayButton: false,
+                                showDownloadButton: false,
+                                showFullscreenButton: false,
+                                showNextButton: false,
+                                showPrevButton: false,
+                                showThumbnailsButton: false,
+                            },
+                            caption: {
+                                showCaption: false,
+                            },
+                            thumbnails: {
+                                showThumbnails: false,
+                            },
+                        }}
+                    >
+                        {/* eslint-disable-next-line react/no-danger */}
+                        <div dangerouslySetInnerHTML={{ __html: post.content }} />
+                    </SRLWrapper>
+                </div>
 
                 {post.author.node.description && (
                     <footer className="mt-5">
