@@ -4,7 +4,7 @@ The frontend for _[Austin's Dev](https://austinsdev.com)_, powered by Next.js, R
 
 The goal of this project is to abstract the frontend away from WordPress, improve performance (such as time to first byte), eliminate the usage of frontend plugins that slow down WordPress, and allow further customization for the intended website.
 
-Pages are statically rendered at build-time except for the search page. They may be server-side rendered during revalidation or if a requested page doesn't exist. This app is required to be rebuilt when content is changed in the WordPress backend.
+Pages are statically generated at build-time except for the search page. They may be server-side rendered during revalidation or if a requested page doesn't exist. This app is required to be rebuilt when content is changed in the WordPress backend.
 
 ## Requirements
 
