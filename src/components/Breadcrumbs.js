@@ -10,7 +10,7 @@ export default function Breadcrumbs({ crumbs }) {
 
             {Array.isArray(crumbs) &&
                 crumbs.map(crumb => (
-                    <Link href={crumb.path} passHref>
+                    <Link key={crumb.path} href={crumb.path} passHref>
                         <Breadcrumb.Item>{crumb.label}</Breadcrumb.Item>
                     </Link>
                 ))}
