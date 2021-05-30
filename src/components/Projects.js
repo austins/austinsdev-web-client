@@ -62,7 +62,7 @@ export default function Projects({ projects }) {
                                 >
                                     <h5>{project.title}</h5>
                                     <div>
-                                        <Badge variant="info" className={`mr-2 font-weight-bold ${styles.projectTag}`}>
+                                        <Badge variant="dark" className={`mr-2 font-weight-bold ${styles.projectTag}`}>
                                             {project.projectCategories.nodes[0].name}
                                         </Badge>
 
@@ -70,7 +70,7 @@ export default function Projects({ projects }) {
                                             project.projectTags.nodes.map(tag => (
                                                 <Badge
                                                     key={tag.id}
-                                                    variant="secondary"
+                                                    variant="info"
                                                     className={`mr-2 font-weight-bold ${styles.projectTag}`}
                                                 >
                                                     {tag.name}
