@@ -83,7 +83,6 @@ export default function Post({ post, slug, year }) {
                                 autoplaySpeed: 0,
                                 disableKeyboardControls: true,
                                 disableWheelControls: true,
-                                disablePanzoom: true,
                             },
                             buttons: {
                                 showAutoplayButton: false,
