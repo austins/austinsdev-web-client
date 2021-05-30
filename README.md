@@ -36,4 +36,6 @@ WordPress should be configured to post to a webhook as well when posts are chang
 
 See LICENSE file in this repo.
 
-Copyright &copy; Austin S. All rights reserved.
+This app has been developed by Austin S.
+
+You may contribute code to this app. You may fork, modify, and use this app as a basis for your own project. You may not use the name and content of _Austin's Dev_ for any derivatives of this project.
