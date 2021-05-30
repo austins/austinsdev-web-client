@@ -4,9 +4,9 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build",
-        "start": "next start --port ${PORT-3000}",
-        "lint": "eslint . --fix --ext .js",
-        "postbuild": "next-sitemap --config next-sitemap.config.js"
+        "postbuild": "next-sitemap --config next-sitemap.config.js",
+        "start": "next start",
+        "lint": "eslint . --fix --ext .js"
     },
     "engines": {
         "node": ">=14.17.0"
