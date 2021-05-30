@@ -75,10 +75,16 @@ figure.is-type-video.wp-embed-aspect-16-9 .wp-block-embed__wrapper > iframe {
     margin-right: 1rem;
 }
 
-.blocks-gallery-item__caption {
+.blocks-gallery-item__caption,
+.wp-caption-text {
     @extend .text-muted;
     text-align: center;
     font-style: italic;
+    margin-top: 2px;
+}
+
+.wp-caption {
+    max-width: 100%;
 }
 
 .alignleft, .alignright {
