@@ -7,15 +7,16 @@ import get from 'lodash/get';
 import Moment from 'react-moment';
 import SimpleReactLightbox from 'simple-react-lightbox';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { apolloClient, mapMenuItemsChildrenToParents } from '../lib/data/apollo';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 function ClientApp({ Component, pageProps, menuItems }) {
     const router = useRouter();
 
-    const handleRouteChangeComplete = url => {
+    const setGoogleAnalyticsPagePath = url => {
         if (process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_TRACKING_ID) {
             window.gtag('config', process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_TRACKING_ID, {
                 page_path: url,
@@ -23,11 +24,26 @@ function ClientApp({ Component, pageProps, menuItems }) {
         }
     };
 
+    const [loading, setLoading] = useState(false);
+
     useEffect(() => {
+        const handleRouteChangeStart = () => setLoading(true);
+
+        const handleRouteChangeComplete = url => {
+            setLoading(false);
+            setGoogleAnalyticsPagePath(url);
+        };
+
+        const handleRouteChangeError = () => setLoading(false);
+
+        router.events.on('routeChangeStart', handleRouteChangeStart);
         router.events.on('routeChangeComplete', handleRouteChangeComplete);
+        router.events.on('routeChangeError', handleRouteChangeError);
 
         return () => {
+            router.events.off('routeChangeStart', handleRouteChangeStart);
             router.events.off('routeChangeComplete', handleRouteChangeComplete);
+            router.events.off('routeChangeError', handleRouteChangeError);
         };
     }, [router.events]);
 
@@ -39,7 +55,7 @@ function ClientApp({ Component, pageProps, menuItems }) {
                 <main id="main">
                     <div id="main-inner">
                         <Container className="py-3">
-                            <Component {...pageProps} />
+                            {(loading && <LoadingSpinner />) || <Component {...pageProps} />}
                         </Container>
                     </div>
                 </main>

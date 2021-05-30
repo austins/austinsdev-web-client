@@ -13,11 +13,23 @@ export default function PostsBySearch({ hasMore, hasPrevious, page, posts, searc
         <div>
             <HeadWithTitle title="Search" noIndex />
 
-            <Breadcrumbs crumbs={crumbs} />
+            {(posts.length && (
+                <div>
+                    <Breadcrumbs crumbs={crumbs} />
 
-            <Posts posts={posts} search={search} />
+                    <Posts posts={posts} search={search} />
 
-            <PostsPager hasMore={hasMore} hasPrevious={hasPrevious} page={page} search={search} />
+                    <PostsPager hasMore={hasMore} hasPrevious={hasPrevious} page={page} search={search} />
+                </div>
+            )) || (
+                <div>
+                    <Breadcrumbs />
+
+                    <h1>Search: {search}</h1>
+
+                    <div>No articles match your search criteria.</div>
+                </div>
+            )}
         </div>
     );
 }
@@ -38,7 +50,6 @@ export async function getServerSideProps({ query }) {
     });
 
     const posts = flattenEdges(data.posts);
-    if (!posts.length) return { notFound: true };
 
     const { hasMore, hasPrevious } = data.posts.pageInfo.offsetPagination;
 
