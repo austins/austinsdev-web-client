@@ -73,7 +73,7 @@ export default function Header({ menuItems }) {
                             )}
                         </Nav>
 
-                        <Form onSubmit={search} inline>
+                        <Form onSubmit={search}>
                             <InputGroup>
                                 <FormControl
                                     type="text"
