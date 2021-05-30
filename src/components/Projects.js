@@ -57,7 +57,9 @@ export default function Projects({ projects }) {
                             )}
 
                             <Col md>
-                                <Card.Body className={`py-md-0 px-0${project.featuredImage ? ' px-md-4' : ''}`}>
+                                <Card.Body
+                                    className={`pb-0 px-0${project.featuredImage ? ' px-md-4 pt-md-0' : ' pt-0'}`}
+                                >
                                     <h5>{project.title}</h5>
                                     <div>
                                         <Badge variant="info" className={`mr-2 font-weight-bold ${styles.projectTag}`}>
@@ -76,12 +78,14 @@ export default function Projects({ projects }) {
                                             ))}
                                     </div>
 
-                                    {/* eslint-disable-next-line react/no-danger */}
-                                    <div className="mt-2" dangerouslySetInnerHTML={{ __html: project.content }} />
+                                    <div
+                                        className={`mt-2 ${styles.projectContent}`}
+                                        dangerouslySetInnerHTML={{ __html: project.content }}
+                                    />
                                 </Card.Body>
                             </Col>
 
-                            <Col md="3" className="text-md-right">
+                            <Col md="3" className="text-md-right mt-3 mt-md-0">
                                 {project.project.previewType && (
                                     <span className="d-md-block pb-1 mb-1 mr-2 mr-mb-0 ml-mb-2">
                                         <a href={project.project.previewLink} target="_blank" rel="noreferrer">
