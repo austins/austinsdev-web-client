@@ -1,4 +1,4 @@
-# This workflow will do a clean install of Node dependencies and ensures that a build runs successfully.
+# This workflow will do a clean install of Node dependencies, ensures that a build runs successfully, and triggers deployment via a webhook.
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
 name: Node.js CI
