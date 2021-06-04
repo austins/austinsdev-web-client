@@ -30,3 +30,10 @@ jobs:
         NODE_ENV: "production"
         API_GRAPHQL_URL: ${{secrets.API_GRAPHQL_URL}}
     #- run: npm test
+    - name: Workflow Webhook Action
+      uses: distributhor/workflow-webhook@v1.0.8
+      with:
+        webhook_url: ${{ secrets.WEBHOOK_URL }}
+        webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
+        webhook_type: "json"
+        silent: true
