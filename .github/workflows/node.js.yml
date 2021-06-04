@@ -1,4 +1,4 @@
-# This workflow will do a clean install of Node dependencies, ensures that a build runs successfully, and triggers deployment via a webhook.
+# This workflow will do a clean install of Node dependencies, ensures that a build runs successfully, and triggers the deployment webhook.
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
 name: Node.js CI
@@ -20,6 +20,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/cache@v2
+      with:
+        path: ${{ github.workspace }}/.next/cache
+        key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
@@ -30,9 +34,9 @@ jobs:
         NODE_ENV: "production"
         API_GRAPHQL_URL: ${{ secrets.API_GRAPHQL_URL }}
     #- run: npm test
-    - name: Workflow Webhook Action
+    - name: Trigger Deployment Webhook
       uses: distributhor/workflow-webhook@v1.0.8
-      with:
+      env:
         webhook_url: ${{ secrets.WEBHOOK_URL }}
         webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
         webhook_type: "json"
