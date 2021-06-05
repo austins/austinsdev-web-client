@@ -41,11 +41,10 @@ jobs:
         
     #- run: npm test
 
-# Webhook trigger disabled until bug with the Action is fixed.
-#    - name: Trigger deployment webhook
-#      uses: distributhor/workflow-webhook@v1.0.8
-#      env:
-#        webhook_url: ${{ secrets.WEBHOOK_URL }}
-#        webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
-#        webhook_type: "json"
-#        silent: true
+    - name: Trigger deployment webhook
+      uses: distributhor/workflow-webhook@v2
+      env:
+        webhook_url: ${{ secrets.WEBHOOK_URL }}
+        webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
+        webhook_type: "json"
+        silent: true
