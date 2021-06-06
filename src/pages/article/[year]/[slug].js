@@ -4,7 +4,6 @@ import { faClock, faComments, faTag, faUser } from '@fortawesome/free-solid-svg-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Moment from 'react-moment';
 import Link from 'next/link';
-import { Media } from 'react-bootstrap';
 import { CommentCount, DiscussionEmbed } from 'disqus-react';
 import { Link as LinkScroll } from 'react-scroll';
 import { useEffect } from 'react';
@@ -107,31 +106,36 @@ export default function Post({ post, slug, year }) {
 
                 {post.author.node.description && (
                     <footer className="mt-5">
+                        <hr className="mb-3" />
+
                         <div>
                             <h4>About the Author</h4>
-                            <Media>
-                                <Link href={`/articles/author/${post.author.node.slug}`} passHref>
-                                    <a>
-                                        <img
-                                            src={post.author.node.avatar.url}
-                                            width={post.author.node.avatar.width}
-                                            height={post.author.node.avatar.height}
-                                            alt={post.author.node.name}
-                                            className={`me-2 ${styles.authorAvatar}`}
-                                        />
-                                    </a>
-                                </Link>
 
-                                <Media.Body>
-                                    <h5 className="mt-0">
+                            <div className="d-flex">
+                                <div className="flex-shrink-0">
+                                    <Link href={`/articles/author/${post.author.node.slug}`} passHref>
+                                        <a>
+                                            <img
+                                                src={post.author.node.avatar.url}
+                                                width={post.author.node.avatar.width}
+                                                height={post.author.node.avatar.height}
+                                                alt={post.author.node.name}
+                                                className={styles.authorAvatar}
+                                            />
+                                        </a>
+                                    </Link>
+                                </div>
+
+                                <div className="flex-grow-1 ms-3">
+                                    <h5 className="mt-0 mb-1">
                                         <Link href={`/articles/author/${post.author.node.slug}`} passHref>
                                             <a>{post.author.node.name}</a>
                                         </Link>
                                     </h5>
 
-                                    <p>{post.author.node.description}</p>
-                                </Media.Body>
-                            </Media>
+                                    <div>{post.author.node.description}</div>
+                                </div>
+                            </div>
                         </div>
                     </footer>
                 )}
