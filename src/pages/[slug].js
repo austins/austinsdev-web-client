@@ -2,6 +2,7 @@ import { gql } from '@apollo/client';
 import { apolloClient } from '../lib/data/apollo';
 import Projects from '../components/Projects';
 import HeadWithTitle from '../components/HeadWithTitle';
+import styles from '../styles/Page.module.scss';
 
 export default function Page({ page, slug, projects }) {
     return (
@@ -12,7 +13,7 @@ export default function Page({ page, slug, projects }) {
 
             <div className="clearfix">
                 {/* eslint-disable-next-line react/no-danger */}
-                <div dangerouslySetInnerHTML={{ __html: page.content }} />
+                <div className={styles.pageContent} dangerouslySetInnerHTML={{ __html: page.content }} />
             </div>
 
             {slug === 'portfolio' && projects && <Projects projects={projects} />}
