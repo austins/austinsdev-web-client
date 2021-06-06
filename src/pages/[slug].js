@@ -47,7 +47,7 @@ export async function getStaticProps({ params }) {
         const { data: projectsData } = await apolloClient.query({
             query: gql`
                 query {
-                    projects(where: { orderby: { field: TITLE, order: ASC } }) {
+                    projects(first: 100, where: { orderby: { field: TITLE, order: ASC } }) {
                         nodes {
                             id
                             content
