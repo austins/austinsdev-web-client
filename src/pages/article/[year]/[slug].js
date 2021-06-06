@@ -133,7 +133,7 @@ export default function Post({ post, slug, year }) {
                                         </Link>
                                     </h5>
 
-                                    <div>{post.author.node.description}</div>
+                                    <div dangerouslySetInnerHTML={{ __html: post.author.node.description }} />
                                 </div>
                             </div>
                         </div>
