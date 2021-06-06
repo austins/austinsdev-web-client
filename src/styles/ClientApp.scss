@@ -89,6 +89,25 @@ figure.is-type-video.wp-embed-aspect-16-9 .wp-block-embed__wrapper {
     max-width: 100%;
 }
 
+.wp-block-columns {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.wp-block-column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+
+    &:last-child {
+        margin-right: 0;
+        margin-bottom: 0;
+    }
+}
+
 .alignleft, .alignright {
     display: block
 }
