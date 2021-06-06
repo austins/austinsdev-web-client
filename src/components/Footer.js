@@ -15,12 +15,12 @@ export default function Footer() {
     return (
         <footer id="footer">
             <Container className="clearfix">
-                <div className="float-left">
+                <div className="float-start">
                     <em>{process.env.NEXT_PUBLIC_SITE_NAME}</em> &copy; {siteCopyrightStartYear}
                     {siteCopyrightStartYear < currentYear && `-${currentYear}`}
                 </div>
 
-                <div className="float-right">
+                <div className="float-end">
                     <a href="#" onClick={scrollToTop}>
                         <FontAwesomeIcon icon={faChevronUp} />
                     </a>

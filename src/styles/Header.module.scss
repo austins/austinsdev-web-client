@@ -1,11 +1,6 @@
-@import 'node_modules/bootswatch/dist/litera/variables';
 @import "node_modules/bootstrap/scss/functions";
 @import 'node_modules/bootstrap/scss/variables';
 @import 'node_modules/bootstrap/scss/mixins/breakpoints';
-
-.navbarBackgroundColor {
-    background-color: $dark !important;
-}
 
 .logoImage {
     max-height: 32px;
@@ -14,7 +9,7 @@
 .searchInput {
     max-width: 156px;
 
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(lg) {
         max-width: none;
     }
 }

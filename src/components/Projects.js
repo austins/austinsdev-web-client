@@ -43,9 +43,9 @@ export default function Projects({ projects }) {
                 {displayedProjects.map(project => (
                     <Card
                         key={project.id}
-                        className={`w-100 pb-4 mt-4 border-top-0 border-left-0 border-right-0 border-bottom ${styles.projectCard}`}
+                        className={`w-100 pb-4 mt-4 border-top-0 border-start-0 border-end-0 border-bottom shadow-none ${styles.projectCard}`}
                     >
-                        <Row noGutters>
+                        <Row>
                             {project.featuredImage && (
                                 <Col md="3">
                                     <Card.Img
@@ -57,12 +57,10 @@ export default function Projects({ projects }) {
                             )}
 
                             <Col md>
-                                <Card.Body
-                                    className={`pb-0 px-0${project.featuredImage ? ' px-md-4 pt-md-0' : ' pt-0'}`}
-                                >
+                                <Card.Body className={`pb-0 px-0${project.featuredImage ? ' pt-md-0' : ' pt-0'}`}>
                                     <h5>{project.title}</h5>
                                     <div>
-                                        <Badge variant="dark" className={`mr-2 font-weight-bold ${styles.projectTag}`}>
+                                        <Badge bg="dark" className={`me-2 font-weight-bold ${styles.projectTag}`}>
                                             {project.projectCategories.nodes[0].name}
                                         </Badge>
 
@@ -70,8 +68,8 @@ export default function Projects({ projects }) {
                                             project.projectTags.nodes.map(tag => (
                                                 <Badge
                                                     key={tag.id}
-                                                    variant="info"
-                                                    className={`mr-2 font-weight-bold ${styles.projectTag}`}
+                                                    bg="info"
+                                                    className={`me-2 font-weight-bold ${styles.projectTag}`}
                                                 >
                                                     {tag.name}
                                                 </Badge>
@@ -85,9 +83,9 @@ export default function Projects({ projects }) {
                                 </Card.Body>
                             </Col>
 
-                            <Col md="3" className="text-md-right mt-3 mt-md-0">
+                            <Col md="3" className="text-md-end mt-3 mt-md-0">
                                 {project.project.previewType && (
-                                    <span className="d-md-block pb-1 mb-1 mr-2 mr-mb-0 ml-mb-2">
+                                    <span className="d-md-block pb-1 mb-1 me-2 me-mb-0 ms-mb-2">
                                         <a href={project.project.previewLink} target="_blank" rel="noreferrer">
                                             <Button variant="primary">{project.project.previewType}</Button>
                                         </a>
@@ -95,7 +93,7 @@ export default function Projects({ projects }) {
                                 )}
 
                                 {project.project.downloadLink && (
-                                    <span className="d-md-block pb-1 mb-1 mr-2 mr-mb-0 ml-mb-2">
+                                    <span className="d-md-block pb-1 mb-1 me-2 me-mb-0 ms-mb-2">
                                         <a href={project.project.downloadLink} target="_blank" rel="noreferrer">
                                             <Button variant="primary">Download</Button>
                                         </a>
@@ -103,7 +101,7 @@ export default function Projects({ projects }) {
                                 )}
 
                                 {project.project.sourceLink && (
-                                    <span className="d-md-block pb-1 mb-1 mr-2 mr-mb-0 ml-mb-2">
+                                    <span className="d-md-block pb-1 mb-1 me-2 me-mb-0 ms-mb-2">
                                         <a href={project.project.sourceLink} target="_blank" rel="noreferrer">
                                             <Button variant="primary">Source</Button>
                                         </a>

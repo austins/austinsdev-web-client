@@ -6,5 +6,3 @@ updates:
             interval: "daily"
         ignore:
             -   dependency-name: "sass"
-            -   dependency-name: "bootstrap"
-            -   dependency-name: "bootswatch"

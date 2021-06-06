@@ -1,13 +1,15 @@
-@import 'node_modules/bootswatch/dist/litera/variables';
+$link-decoration: none;
 
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&Roboto+Condensed&display=swap');
-$font-family-sans-serif: 'Open Sans', $font-family-sans-serif;
-$font-family-serif: $font-family-sans-serif;
-$headings-font-family: 'Roboto Condensed', $font-family-sans-serif;
-$headings-font-weight: 500;
+$container-max-widths: (
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1140px
+);
 
+@import 'node_modules/bootswatch/dist/zephyr/variables';
 @import 'node_modules/bootstrap/scss/bootstrap';
-@import 'node_modules/bootswatch/dist/litera/bootswatch';
+@import 'node_modules/bootswatch/dist/zephyr/bootswatch';
 
 #main {
     display: flex;
@@ -28,8 +30,23 @@ $headings-font-weight: 500;
 #footer {
     margin-top: 50px;
     padding: 20px 0;
-    border-top: 1px solid #eee;
+    border-top: 1px solid $border-color;
     background-color: $light;
+}
+
+@include media-breakpoint-down(lg) {
+    #navbar-collapse {
+        margin: 0.5rem 0 0;
+    }
+
+    #navbar-collapse .nav-item {
+        margin: 0.3rem 0;
+    }
+
+    #navbar-collapse .nav-link {
+        padding-left: 0.6rem;
+        padding-right: 0.6rem;
+    }
 }
 
 h1 {
@@ -54,14 +71,7 @@ pre {
 }
 
 figure.is-type-video.wp-embed-aspect-16-9 .wp-block-embed__wrapper {
-    @extend .embed-responsive;
-    &:before {
-        padding-top: 56.25%;
-    }
-}
-
-figure.is-type-video.wp-embed-aspect-16-9 .wp-block-embed__wrapper > iframe {
-    @extend .embed-responsive-item;
+    @extend .ratio, .ratio-16x9;
 }
 
 .blocks-gallery-grid {

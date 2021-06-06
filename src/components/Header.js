@@ -21,7 +21,7 @@ export default function Header({ menuItems }) {
 
     return (
         <header>
-            <Navbar className={styles.navbarBackgroundColor} variant="dark" expand="lg">
+            <Navbar bg="dark" variant="dark" expand="lg">
                 <Container>
                     <Link href="/" passHref>
                         <Navbar.Brand>
@@ -33,10 +33,10 @@ export default function Header({ menuItems }) {
                         </Navbar.Brand>
                     </Link>
 
-                    <Navbar.Toggle aria-controls="navbar-nav" />
+                    <Navbar.Toggle aria-controls="navbar-collapse" />
 
-                    <Navbar.Collapse id="navbar-nav">
-                        <Nav className="mr-auto">
+                    <Navbar.Collapse id="navbar-collapse">
+                        <Nav className="me-auto">
                             {!menuItems.length ? (
                                 <HeaderMenuItemLink href="/">
                                     <a className="nav-link">Home</a>
@@ -73,7 +73,7 @@ export default function Header({ menuItems }) {
                             )}
                         </Nav>
 
-                        <Form onSubmit={search}>
+                        <Form onSubmit={search} className="d-flex">
                             <InputGroup>
                                 <FormControl
                                     type="text"
@@ -83,11 +83,9 @@ export default function Header({ menuItems }) {
                                     required
                                 />
 
-                                <InputGroup.Append>
-                                    <Button type="submit" variant="primary">
-                                        <FontAwesomeIcon icon={faSearch} />
-                                    </Button>
-                                </InputGroup.Append>
+                                <Button type="submit" variant="primary">
+                                    <FontAwesomeIcon icon={faSearch} />
+                                </Button>
                             </InputGroup>
                         </Form>
                     </Navbar.Collapse>

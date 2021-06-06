@@ -117,7 +117,7 @@ export default function Post({ post, slug, year }) {
                                             width={post.author.node.avatar.width}
                                             height={post.author.node.avatar.height}
                                             alt={post.author.node.name}
-                                            className={`mr-2 ${styles.authorAvatar}`}
+                                            className={`me-2 ${styles.authorAvatar}`}
                                         />
                                     </a>
                                 </Link>

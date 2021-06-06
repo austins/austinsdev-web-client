@@ -5,8 +5,6 @@
 
 .postCardLink {
     color: $body-color;
-    display: flex;
-    flex-direction: column;
 
     &:hover {
         text-decoration: none;
@@ -20,32 +18,12 @@
     position: relative;
     top: 0;
     transition: all ease-in-out 0.1s;
-    margin-bottom: 2rem !important;
+    height: 100%;
 
     &:hover {
         cursor: pointer;
         top: -4px;
         border-color: $primary;
-    }
-
-    @include media-breakpoint-up(sm) {
-        min-width: 240px;
-        max-width: 240px;
-    }
-
-    @include media-breakpoint-only(md) {
-        min-width: 330px;
-        max-width: 330px;
-    }
-
-    @include media-breakpoint-only(lg) {
-        min-width: 290px;
-        max-width: 290px;
-    }
-
-    @include media-breakpoint-only(xl) {
-        min-width: 350px;
-        max-width: 350px;
     }
 }
 
@@ -60,6 +38,7 @@
     font-size: $small-font-size;
 
     span {
+        display: inline-block;
         margin-right: 10px;
     }
 
