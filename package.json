@@ -41,7 +41,7 @@
         "@ijsto/eslint-config": "^4.1.6",
         "babel-plugin-prismjs": "^2.0.1",
         "eslint": "^7.28.0",
-        "next-sitemap": "^1.6.105",
+        "next-sitemap": "^1.6.108",
         "sass": "~1.32.12"
     }
 }
