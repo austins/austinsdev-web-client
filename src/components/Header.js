@@ -27,7 +27,7 @@ export default function Header({ menuItems }) {
                 <Container>
                     <Link href="/" passHref>
                         <Navbar.Brand className={styles.navbarBrand}>
-                            <Image src={logoLight} alt={process.env.NEXT_PUBLIC_SITE_NAME} />
+                            <Image src={logoLight} alt={process.env.NEXT_PUBLIC_SITE_NAME} quality={100} priority />
                         </Navbar.Brand>
                     </Link>
 
