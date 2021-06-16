@@ -9,6 +9,7 @@ import { Link as LinkScroll } from 'react-scroll';
 import { useEffect } from 'react';
 import Prism from 'prismjs';
 import { SRLWrapper } from 'simple-react-lightbox';
+import Image from 'next/image';
 import { apolloClient } from '../../../lib/data/apollo';
 import HeadWithTitle from '../../../components/HeadWithTitle';
 import styles from '../../../styles/Post.module.scss';
@@ -115,12 +116,11 @@ export default function Post({ post, slug, year }) {
                                 <div className="flex-shrink-0">
                                     <Link href={`/articles/author/${post.author.node.slug}`} passHref>
                                         <a>
-                                            <img
+                                            <Image
                                                 src={post.author.node.avatar.url}
                                                 width={post.author.node.avatar.width}
                                                 height={post.author.node.avatar.height}
                                                 alt={post.author.node.name}
-                                                className={styles.authorAvatar}
                                             />
                                         </a>
                                     </Link>
