@@ -11,7 +11,7 @@ export default function PostsPagerButton({ path, enabled, children }) {
     if (path.pathname === '#') return getPagerButton();
 
     return (
-        <Link href={path} passHref={path.pathname !== '#'}>
+        <Link href={path} passHref>
             {getPagerButton(enabled)}
         </Link>
     );
