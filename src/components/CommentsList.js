@@ -9,7 +9,7 @@ import Moment from 'react-moment';
 import { Alert, Button, Col, Form, Row } from 'react-bootstrap';
 import { Link as LinkScroll } from 'react-scroll';
 import defaultAvatar from '../../public/assets/images/default-comment-avatar.jpg';
-import styles from '../styles/Comments.module.scss';
+import styles from '../styles/CommentsList.module.scss';
 import { flattenEdges } from '../lib/data/helpers';
 import { swrFetcher } from '../lib/data/swr';
 
