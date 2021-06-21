@@ -134,6 +134,7 @@ function Post({ year, slug, commentCount }) {
                                                 width={post.author.node.avatar.width}
                                                 height={post.author.node.avatar.height}
                                                 alt={post.author.node.name}
+                                                quality={100}
                                             />
                                         </a>
                                     </Link>
