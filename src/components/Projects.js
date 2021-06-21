@@ -64,7 +64,7 @@ export default function Projects({ projects }) {
                                             {project.projectCategories.nodes[0].name}
                                         </Badge>
 
-                                        {project.projectTags.nodes.length &&
+                                        {project.projectTags.nodes.length > 0 &&
                                             project.projectTags.nodes.map(tag => (
                                                 <Badge
                                                     key={tag.id}
