@@ -2,7 +2,7 @@
     "name": "austinsdev-web-client",
     "private": true,
     "scripts": {
-        "createGlobalDataManifest": "node ./src/lib/data/createGlobalDataManifest.js",
+        "createGlobalDataManifest": "node createGlobalDataManifest.js",
         "predev": "npm run createGlobalDataManifest",
         "dev": "next dev",
         "prebuild": "npm run createGlobalDataManifest",
