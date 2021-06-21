@@ -1,10 +1,25 @@
-import { gql } from '@apollo/client';
-import { apolloClient } from '../lib/data/apollo';
+import { gql, useQuery } from 'urql';
+import Error from 'next/error';
 import Projects from '../components/Projects';
 import HeadWithTitle from '../components/HeadWithTitle';
 import styles from '../styles/Page.module.scss';
+import { getUrqlClient, wrapUrqlClient } from '../lib/data/urql';
+import LoadingSpinner from '../components/LoadingSpinner';
+import { pageQuery, projectsQuery } from '../lib/data/queries';
 
-export default function Page({ page, slug, projects }) {
+const portfolioSlug = 'portfolio';
+const getPageQueryVars = slug => ({ slug });
+
+function Page({ slug, projects }) {
+    const [result] = useQuery({ query: pageQuery, variables: getPageQueryVars(slug) });
+    const { data, fetching, error } = result;
+
+    if (fetching) return <LoadingSpinner />;
+    if (error) return <Error statusCode={500} title="Error retrieving page" />;
+
+    const page = data.pageBy;
+    if (!page) return <Error statusCode={404} title="Page not found" />;
+
     return (
         <div>
             <HeadWithTitle title={page.title} innerHTMLString={page.seo.fullHead} />
@@ -16,7 +31,7 @@ export default function Page({ page, slug, projects }) {
                 <div className={styles.pageContent} dangerouslySetInnerHTML={{ __html: page.content }} />
             </div>
 
-            {slug === 'portfolio' && projects && <Projects projects={projects} />}
+            {projects && <Projects projects={projects} />}
         </div>
     );
 }
@@ -24,84 +39,38 @@ export default function Page({ page, slug, projects }) {
 export async function getStaticProps({ params }) {
     const { slug } = params;
 
-    const { data } = await apolloClient.query({
-        query: gql`
-            query ($slug: String!) {
-                pageBy(uri: $slug) {
-                    title
-                    content
-                    seo {
-                        fullHead
-                    }
-                }
-            }
-        `,
-        variables: { slug },
-    });
+    const { urqlClient, ssrCache } = getUrqlClient();
 
-    const page = data.pageBy;
-    if (!page) return { notFound: true };
+    await urqlClient.query(pageQuery, getPageQueryVars(slug)).toPromise();
 
-    // Get projects for portfolio page.
+    // If portfolio page, get projects.
     let projects = null;
-    if (slug === 'portfolio') {
-        const { data: projectsData } = await apolloClient.query({
-            query: gql`
-                query {
-                    projects(first: 100, where: { orderby: { field: TITLE, order: ASC } }) {
-                        nodes {
-                            id
-                            content
-                            title
-                            featuredImage {
-                                node {
-                                    mediaItemUrl
-                                }
-                            }
-                            project {
-                                downloadLink
-                                previewLink
-                                previewType
-                                sourceLink
-                            }
-                            projectCategories(where: { orderby: NAME }) {
-                                nodes {
-                                    name
-                                }
-                            }
-                            projectTags(where: { orderby: NAME }) {
-                                nodes {
-                                    id
-                                    name
-                                }
-                            }
-                        }
-                    }
-                }
-            `,
-        });
-
-        if (projectsData.projects && projectsData.projects.nodes.length) projects = projectsData.projects.nodes;
+    if (slug === portfolioSlug) {
+        const { data: projectsData } = await urqlClient.query(projectsQuery).toPromise();
+        if (projectsData && projectsData.projects.nodes.length) projects = projectsData.projects.nodes;
     }
 
     return {
-        props: { page, projects, slug },
+        props: { urqlState: ssrCache.extractData(), slug, projects },
         revalidate: Number(process.env.REVALIDATION_IN_SECONDS),
     };
 }
 
 export async function getStaticPaths() {
-    const { data } = await apolloClient.query({
-        query: gql`
-            query {
-                pages(first: 100, where: { status: PUBLISH }) {
-                    nodes {
-                        slug
+    const { urqlClient } = getUrqlClient();
+    const { data } = await urqlClient
+        .query(
+            gql`
+                query {
+                    pages(first: 100, where: { status: PUBLISH }) {
+                        nodes {
+                            slug
+                        }
                     }
                 }
-            }
-        `,
-    });
+            `
+        )
+        .toPromise();
 
     const pages = data.pages.nodes;
 
@@ -111,3 +80,5 @@ export async function getStaticPaths() {
 
     return { fallback: 'blocking', paths };
 }
+
+export default wrapUrqlClient(Page);
