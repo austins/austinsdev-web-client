@@ -5,7 +5,7 @@ import { commentFieldsFragment } from '../../../lib/data/queries';
 export default async function handler(req, res) {
     if (req.method !== 'POST' || !req.body) return res.status(405).send();
 
-    const urqlClient = getUrqlClientStandalone(false, req.headers.cookie);
+    const urqlClient = getUrqlClientStandalone(true, req.headers.cookie);
     const { data, error } = await urqlClient
         .mutation(
             gql`
