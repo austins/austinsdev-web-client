@@ -1,24 +1,35 @@
-import { gql, useQuery } from 'urql';
 import Error from 'next/error';
+import useSWR from 'swr';
+import { gql } from 'graphql-request';
+import memoize from 'fast-memoize';
 import Projects from '../components/Projects';
 import HeadWithTitle from '../components/HeadWithTitle';
 import styles from '../styles/Page.module.scss';
-import { getUrqlClient, wrapUrqlClient } from '../lib/data/urql';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { pageQuery, projectsQuery } from '../lib/data/queries';
+import { graphqlFetcher } from '../lib/data/fetchers';
 
 const portfolioSlug = 'portfolio';
-const getPageQueryVars = slug => ({ slug });
+const getPageQueryVars = memoize(slug => ({ slug }));
 
-function Page({ slug, projects }) {
-    const [result] = useQuery({ query: pageQuery, variables: getPageQueryVars(slug) });
-    const { data, fetching, error } = result;
+export default function Page({ slug, initialPageData, initialProjectsData }) {
+    const { data: pageData, error: pageError } = useSWR([pageQuery, getPageQueryVars(slug)], graphqlFetcher, {
+        initialData: initialPageData,
+    });
 
-    if (fetching) return <LoadingSpinner />;
-    if (error) return <Error statusCode={500} title="Error retrieving page" />;
+    const { data: projectsData, error: projectsError } = useSWR(
+        slug === portfolioSlug ? projectsQuery : null,
+        graphqlFetcher,
+        { initialData: initialProjectsData }
+    );
 
-    const page = data.pageBy;
-    if (!page) return <Error statusCode={404} title="Page not found" />;
+    if ((!pageError && !pageData) || (!projectsError && !projectsData)) return <LoadingSpinner />;
+    if (pageError || projectsError) return <Error statusCode={500} title="Error retrieving page" />;
+
+    const page = pageData.pageBy;
+
+    let projects = null;
+    if (projectsData && projectsData.projects.nodes.length) projects = projectsData.projects.nodes;
 
     return (
         <div>
@@ -39,40 +50,32 @@ function Page({ slug, projects }) {
 export async function getStaticProps({ params }) {
     const { slug } = params;
 
-    const { urqlClient, ssrCache } = getUrqlClient();
+    const initialPageData = await graphqlFetcher(pageQuery, getPageQueryVars(slug));
 
-    await urqlClient.query(pageQuery, getPageQueryVars(slug)).toPromise();
+    if (!initialPageData.pageBy) return { notFound: true };
 
     // If portfolio page, get projects.
-    let projects = null;
-    if (slug === portfolioSlug) {
-        const { data: projectsData } = await urqlClient.query(projectsQuery).toPromise();
-        if (projectsData && projectsData.projects.nodes.length) projects = projectsData.projects.nodes;
-    }
+    let initialProjectsData = null;
+    if (slug === portfolioSlug) initialProjectsData = await graphqlFetcher(projectsQuery);
 
     return {
-        props: { urqlState: ssrCache.extractData(), slug, projects },
+        props: { slug, initialPageData, initialProjectsData },
         revalidate: Number(process.env.REVALIDATION_IN_SECONDS),
     };
 }
 
 export async function getStaticPaths() {
-    const { urqlClient } = getUrqlClient();
-    const { data } = await urqlClient
-        .query(
-            gql`
-                query {
-                    pages(first: 100, where: { status: PUBLISH }) {
-                        nodes {
-                            slug
-                        }
-                    }
+    const pageData = await graphqlFetcher(gql`
+        query {
+            pages(first: 100, where: { status: PUBLISH }) {
+                nodes {
+                    slug
                 }
-            `
-        )
-        .toPromise();
+            }
+        }
+    `);
 
-    const pages = data.pages.nodes;
+    const pages = pageData.pages.nodes;
 
     const paths = pages.map(page => ({
         params: { slug: page.slug },
@@ -80,5 +83,3 @@ export async function getStaticPaths() {
 
     return { fallback: 'blocking', paths };
 }
-
-export default wrapUrqlClient(Page);
