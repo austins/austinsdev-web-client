@@ -1,6 +1,6 @@
 # austinsdev-web-client
 
-The frontend for _[Austin's Dev](https://austinsdev.com)_, powered by Next.js, React, GraphQL with urql, and Bootstrap.
+The frontend for _[Austin's Dev](https://austinsdev.com)_, powered by Next.js, React, GraphQL with graphql-request and SWR, and Bootstrap.
 
 The goal of this project is to abstract the frontend away from WordPress, improve performance (such as time to first byte), eliminate the usage of frontend plugins that slow down WordPress, and allow further customization for the intended website.
 
