@@ -23,7 +23,9 @@ export default function Page({ slug, initialPageData, initialProjectsData }) {
         { initialData: initialProjectsData }
     );
 
-    if ((!pageError && !pageData) || (!projectsError && !projectsData)) return <LoadingSpinner />;
+    if ((!pageError && !pageData) || (slug === portfolioSlug && !projectsError && !projectsData))
+        return <LoadingSpinner />;
+
     if (pageError || projectsError) return <Error statusCode={500} title="Error retrieving page" />;
 
     const page = pageData.pageBy;
