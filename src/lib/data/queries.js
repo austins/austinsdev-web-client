@@ -1,6 +1,6 @@
-// Fragments
 import { gql } from 'graphql-request';
 
+// Fragments
 export const commentFieldsFragment = gql`
     fragment commentFields on Comment {
         id
