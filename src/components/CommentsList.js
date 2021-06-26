@@ -12,7 +12,8 @@ import rfdc from 'rfdc';
 import defaultAvatar from '../../public/assets/images/default-comment-avatar.jpg';
 import styles from '../styles/CommentsList.module.scss';
 import { flattenEdges } from '../lib/data/helpers';
-import { apiFetcher } from '../lib/data/fetchers';
+import { restFetcher } from '../lib/data/fetchers';
+import LoadingSpinner from './LoadingSpinner';
 
 function ReplyToCommentMetadata(databaseId, authorName) {
     this.databaseId = databaseId;
@@ -20,7 +21,7 @@ function ReplyToCommentMetadata(databaseId, authorName) {
 }
 
 export default function CommentsList({ postData, postMutate }) {
-    const { data: userData } = useSWR('/api/user', apiFetcher, { revalidateOnFocus: true });
+    const { data: userData } = useSWR('/api/user', restFetcher, { revalidateOnFocus: true });
     const isLoggedIn = userData && has(userData, 'name');
 
     const displayedComments = flattenEdges(postData.postBy.comments);
@@ -37,7 +38,7 @@ export default function CommentsList({ postData, postMutate }) {
     const submitComment = e => {
         e.preventDefault();
 
-        fetch('/api/comments/create', {
+        fetch('/api/comments', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -221,34 +222,33 @@ export default function CommentsList({ postData, postMutate }) {
                     </Alert>
                 )}
 
-                {isLoggedIn && <div className="fst-italic">Logged in as {userData.name}.</div>}
-
                 <Form onSubmit={submitComment} id="comment-form">
-                    {!isLoggedIn && (
-                        <Row>
-                            <Form.Group as={Col} controlId="comment-form-name">
-                                <Form.Label className="text-end">Your Name</Form.Label>
+                    {(!userData && <LoadingSpinner />) ||
+                        (isLoggedIn && <div className="fst-italic">Logged in as {userData.name}.</div>) || (
+                            <Row>
+                                <Form.Group as={Col} controlId="comment-form-name">
+                                    <Form.Label className="text-end">Your Name</Form.Label>
 
-                                <Form.Control
-                                    type="text"
-                                    value={commentFormName}
-                                    onChange={e => setCommentFormName(e.target.value)}
-                                    required
-                                />
-                            </Form.Group>
+                                    <Form.Control
+                                        type="text"
+                                        value={commentFormName}
+                                        onChange={e => setCommentFormName(e.target.value)}
+                                        required
+                                    />
+                                </Form.Group>
 
-                            <Form.Group as={Col} controlId="comment-form-email">
-                                <Form.Label className="text-end">Your Email</Form.Label>
+                                <Form.Group as={Col} controlId="comment-form-email">
+                                    <Form.Label className="text-end">Your Email</Form.Label>
 
-                                <Form.Control
-                                    type="email"
-                                    value={commentFormEmail}
-                                    onChange={e => setCommentFormEmail(e.target.value)}
-                                    required
-                                />
-                            </Form.Group>
-                        </Row>
-                    )}
+                                    <Form.Control
+                                        type="email"
+                                        value={commentFormEmail}
+                                        onChange={e => setCommentFormEmail(e.target.value)}
+                                        required
+                                    />
+                                </Form.Group>
+                            </Row>
+                        )}
 
                     <Form.Group controlId="comment-form-message" className="mt-2">
                         <Form.Label>Message</Form.Label>

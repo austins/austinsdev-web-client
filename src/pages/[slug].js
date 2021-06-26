@@ -1,33 +1,13 @@
-import Error from 'next/error';
-import useSWR from 'swr';
 import { gql } from 'graphql-request';
-import memoize from 'fast-memoize';
 import Projects from '../components/Projects';
 import HeadWithTitle from '../components/HeadWithTitle';
 import styles from '../styles/Page.module.scss';
-import LoadingSpinner from '../components/LoadingSpinner';
 import { pageQuery, projectsQuery } from '../lib/data/queries';
 import { graphqlFetcher } from '../lib/data/fetchers';
 
 const portfolioSlug = 'portfolio';
-const getPageQueryVars = memoize(slug => ({ slug }));
 
-export default function Page({ slug, initialPageData, initialProjectsData }) {
-    const { data: pageData, error: pageError } = useSWR([pageQuery, getPageQueryVars(slug)], graphqlFetcher, {
-        initialData: initialPageData,
-    });
-
-    const { data: projectsData, error: projectsError } = useSWR(
-        slug === portfolioSlug ? projectsQuery : null,
-        graphqlFetcher,
-        { initialData: initialProjectsData }
-    );
-
-    if ((!pageError && !pageData) || (slug === portfolioSlug && !projectsError && !projectsData))
-        return <LoadingSpinner />;
-
-    if (pageError || projectsError) return <Error statusCode={500} title="Error retrieving page" />;
-
+export default function Page({ pageData, projectsData }) {
     const page = pageData.pageBy;
 
     let projects = null;
@@ -52,16 +32,16 @@ export default function Page({ slug, initialPageData, initialProjectsData }) {
 export async function getStaticProps({ params }) {
     const { slug } = params;
 
-    const initialPageData = await graphqlFetcher(pageQuery, getPageQueryVars(slug));
+    const pageData = await graphqlFetcher(pageQuery, { slug });
 
-    if (!initialPageData.pageBy) return { notFound: true };
+    if (!pageData.pageBy) return { notFound: true };
 
     // If portfolio page, get projects.
-    let initialProjectsData = null;
-    if (slug === portfolioSlug) initialProjectsData = await graphqlFetcher(projectsQuery);
+    let projectsData = null;
+    if (slug === portfolioSlug) projectsData = await graphqlFetcher(projectsQuery);
 
     return {
-        props: { slug, initialPageData, initialProjectsData },
+        props: { pageData, projectsData },
         revalidate: Number(process.env.REVALIDATION_IN_SECONDS),
     };
 }
