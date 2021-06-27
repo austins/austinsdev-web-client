@@ -28,6 +28,8 @@ export default function Posts({ authorName, categoryName, posts, search }) {
                                                 <Card.Img
                                                     as={Image}
                                                     className={styles.postThumbnail}
+                                                    placeholder="blur"
+                                                    blurDataURL={post.featuredImage.node.blurDataURL}
                                                     src={post.featuredImage.node.mediaItemUrl}
                                                     alt={post.title}
                                                     quality={100}
