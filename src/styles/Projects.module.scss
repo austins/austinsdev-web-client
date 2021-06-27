@@ -6,9 +6,10 @@
     }
 }
 
-.projectThumbnail {
-    object-fit: cover;
-    height: 145px !important;
+.projectThumbnailContainer {
+    position: relative;
+    height: 100vw;
+    max-height: 145px;
 }
 
 .projectTag {

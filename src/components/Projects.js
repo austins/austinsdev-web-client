@@ -1,5 +1,6 @@
 import { Badge, Button, Card, Col, Nav, Row } from 'react-bootstrap';
 import { useState } from 'react';
+import Image from 'next/image';
 import styles from '../styles/Projects.module.scss';
 
 export default function Projects({ projects }) {
@@ -48,11 +49,16 @@ export default function Projects({ projects }) {
                         <Row>
                             {project.featuredImage && (
                                 <Col md="3">
-                                    <Card.Img
-                                        className={styles.projectThumbnail}
-                                        src={project.featuredImage.node.mediaItemUrl}
-                                        alt={project.title}
-                                    />
+                                    <div className={styles.projectThumbnailContainer}>
+                                        <Card.Img
+                                            as={Image}
+                                            src={project.featuredImage.node.mediaItemUrl}
+                                            alt={project.title}
+                                            quality={100}
+                                            layout="fill"
+                                            objectFit="cover"
+                                        />
+                                    </div>
                                 </Col>
                             )}
 
