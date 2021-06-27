@@ -35,7 +35,6 @@ export default function Posts({ authorName, categoryName, posts, search }) {
                                                     quality={100}
                                                     layout="fill"
                                                     objectFit="cover"
-                                                    priority
                                                 />
                                             </div>
                                         )}
