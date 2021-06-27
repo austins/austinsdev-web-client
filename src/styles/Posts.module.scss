@@ -13,8 +13,6 @@
 }
 
 .postCard {
-    display: block;
-    flex-direction: unset;
     position: relative;
     top: 0;
     transition: all ease-in-out 0.1s;
@@ -27,10 +25,14 @@
     }
 }
 
-.postThumbnail {
+.postThumbnailContainer {
+    position: relative;
+    height: 100vw;
     max-height: 200px;
+}
+
+.postThumbnail {
     border-radius: 0 !important;
-    object-fit: cover;
 }
 
 .postMeta {
