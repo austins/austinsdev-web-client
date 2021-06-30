@@ -34,8 +34,8 @@ export default function Post({ slug, initialPostData }) {
         Prism.highlightAll();
     }, []);
 
+    if (!error && !data) return <LoadingSpinner />;
     if (error) return <Error statusCode={StatusCodes.INTERNAL_SERVER_ERROR} />;
-    if (!data) return <LoadingSpinner />;
 
     const post = data.postBy;
 
