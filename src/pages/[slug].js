@@ -4,6 +4,7 @@ import HeadWithTitle from '../components/HeadWithTitle';
 import styles from '../styles/Page.module.scss';
 import { pageQuery, projectsQuery } from '../lib/data/queries';
 import { graphqlFetcher } from '../lib/data/fetchers';
+import { parseImages } from '../lib/data/helpers';
 
 const portfolioSlug = 'portfolio';
 
@@ -20,8 +21,7 @@ export default function Page({ pageData, projectsData }) {
             <h1>{page.title}</h1>
 
             <div className="clearfix">
-                {/* eslint-disable-next-line react/no-danger */}
-                <div className={styles.pageContent} dangerouslySetInnerHTML={{ __html: page.content }} />
+                <div className={styles.pageContent}>{parseImages(page.content)}</div>
             </div>
 
             {projects && <Projects projects={projects} />}
