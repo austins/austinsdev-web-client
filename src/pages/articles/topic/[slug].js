@@ -18,6 +18,7 @@ export default function Category({ page, slug, postsData }) {
             <HeadWithTitle title={categoryName} noIndex />
 
             <Posts categoryName={categoryName} posts={posts} />
+
             <PostsPager categorySlug={slug} hasMore={hasMore} hasPrevious={hasPrevious} page={page} />
         </>
     );

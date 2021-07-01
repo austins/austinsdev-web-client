@@ -19,6 +19,7 @@ export default function Author({ page, slug, postsData }) {
             <HeadWithTitle title={authorName} noIndex />
 
             <Posts authorName={authorName} posts={posts} />
+
             <PostsPager authorSlug={slug} hasMore={hasMore} hasPrevious={hasPrevious} page={page} />
         </>
     );
