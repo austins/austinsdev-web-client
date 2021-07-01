@@ -8,7 +8,7 @@ import Page from '../components/Page';
 const portfolioSlug = 'portfolio';
 
 export default function SinglePage({ pageData, projectsData }) {
-    const page = pageData.pageBy;
+    const { page } = pageData;
 
     let projects = null;
     if (projectsData && projectsData.projects.nodes.length) projects = projectsData.projects.nodes;
@@ -29,7 +29,7 @@ export async function getStaticProps({ params }) {
 
     const pageData = await graphqlFetcher(pageQuery, { slug });
 
-    if (!pageData.pageBy) return { notFound: true };
+    if (!pageData.page) return { notFound: true };
 
     // If portfolio page, get projects.
     let projectsData = null;
