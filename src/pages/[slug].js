@@ -1,31 +1,26 @@
 import { gql } from 'graphql-request';
 import Projects from '../components/Projects';
 import HeadWithTitle from '../components/HeadWithTitle';
-import styles from '../styles/Page.module.scss';
 import { pageQuery, projectsQuery } from '../lib/data/queries';
 import { graphqlFetcher } from '../lib/data/fetchers';
-import { parseImages } from '../lib/data/helpers';
+import Page from '../components/Page';
 
 const portfolioSlug = 'portfolio';
 
-export default function Page({ pageData, projectsData }) {
+export default function SinglePage({ pageData, projectsData }) {
     const page = pageData.pageBy;
 
     let projects = null;
     if (projectsData && projectsData.projects.nodes.length) projects = projectsData.projects.nodes;
 
     return (
-        <div>
+        <>
             <HeadWithTitle title={page.title} innerHTMLString={page.seo.fullHead} />
 
-            <h1>{page.title}</h1>
-
-            <div className="clearfix">
-                <div className={styles.pageContent}>{parseImages(page.content)}</div>
-            </div>
+            <Page page={page} parseContent />
 
             {projects && <Projects projects={projects} />}
-        </div>
+        </>
     );
 }
 
