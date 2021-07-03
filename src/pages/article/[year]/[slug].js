@@ -2,12 +2,11 @@ import isInt from 'validator/lib/isInt';
 import { useEffect } from 'react';
 import Prism from 'prismjs';
 import has from 'lodash/has';
-import { gql } from 'graphql-request';
 import useSWR from 'swr';
 import memoize from 'fast-memoize';
 import HeadWithTitle from '../../../components/HeadWithTitle';
 import Comments from '../../../components/Comments';
-import { postQuery } from '../../../lib/data/queries';
+import { postQuery, postPathsQuery } from '../../../lib/data/queries';
 import { graphqlFetcher } from '../../../lib/data/fetchers';
 import Post from '../../../components/Post';
 
@@ -62,15 +61,7 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-    const postsData = await graphqlFetcher(gql`
-        query {
-            posts(first: 100, where: { status: PUBLISH }) {
-                nodes {
-                    uri
-                }
-            }
-        }
-    `);
+    const postsData = await graphqlFetcher(postPathsQuery);
 
     const posts = postsData.posts.nodes;
 

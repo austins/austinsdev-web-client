@@ -1,7 +1,6 @@
-import { gql } from 'graphql-request';
 import Projects from '../components/Projects';
 import HeadWithTitle from '../components/HeadWithTitle';
-import { pageQuery, projectsQuery } from '../lib/data/queries';
+import { pagePathsQuery, pageQuery, projectsQuery } from '../lib/data/queries';
 import { graphqlFetcher } from '../lib/data/fetchers';
 import Page from '../components/Page';
 
@@ -42,15 +41,7 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-    const pageData = await graphqlFetcher(gql`
-        query {
-            pages(first: 100, where: { status: PUBLISH }) {
-                nodes {
-                    slug
-                }
-            }
-        }
-    `);
+    const pageData = await graphqlFetcher(pagePathsQuery);
 
     const pages = pageData.pages.nodes;
 
