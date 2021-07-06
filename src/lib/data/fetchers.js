@@ -3,7 +3,7 @@ import isString from 'lodash/isString';
 import set from 'lodash/set';
 import { StatusCodes } from 'http-status-codes';
 
-export const restFetcher = async url => {
+export const restFetcher = async (url) => {
     const res = await fetch(url);
 
     if (!res.ok) {

@@ -57,7 +57,7 @@ export async function getStaticPaths() {
 
     const users = usersData.users.nodes;
 
-    const paths = users.map(user => ({
+    const paths = users.map((user) => ({
         params: { slug: user.slug },
     }));
 

@@ -17,7 +17,7 @@ export function mapMenuItemsChildrenToParents(menuItemsNodes) {
     const tree = [];
     const childrenOf = {};
 
-    menuItemsNodes.forEach(item => {
+    menuItemsNodes.forEach((item) => {
         const newItem = { ...item };
 
         if (newItem.url !== null) {
@@ -62,7 +62,7 @@ export function parseImages(text) {
 
                 if (
                     !imageProps.className ||
-                    !imageProps.className.split(' ').some(className => className.startsWith('wp-image-')) ||
+                    !imageProps.className.split(' ').some((className) => className.startsWith('wp-image-')) ||
                     !imageProps.width ||
                     !imageProps.height
                 )

@@ -31,12 +31,12 @@ export async function getServerSideProps(context) {
     );
 
     // Page urls.
-    pagesData.pages.nodes.forEach(page => {
+    pagesData.pages.nodes.forEach((page) => {
         fields.push(new SitemapUrl(`${siteUrl}/${page.slug}`, new Date(`${page.modifiedGmt}Z`).toISOString(), '0.7'));
     });
 
     // Post urls.
-    postsData.posts.nodes.forEach(post => {
+    postsData.posts.nodes.forEach((post) => {
         fields.push(new SitemapUrl(`${siteUrl}${post.uri}`, new Date(`${post.modifiedGmt}Z`).toISOString(), '0.7'));
     });
 

@@ -58,7 +58,7 @@ export async function getStaticPaths() {
 
     const categories = categoriesData.categories.nodes;
 
-    const paths = categories.map(category => ({
+    const paths = categories.map((category) => ({
         params: { slug: category.slug },
     }));
 

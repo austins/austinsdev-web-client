@@ -15,7 +15,7 @@ import Footer from '../components/Footer';
 export default function ClientApp({ Component, pageProps }) {
     const router = useRouter();
 
-    const setGoogleAnalyticsPagePath = url => {
+    const setGoogleAnalyticsPagePath = (url) => {
         if (process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_TRACKING_ID && typeof window !== 'undefined' && window.gtag) {
             window.gtag('config', process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_TRACKING_ID, {
                 page_path: url,
@@ -34,7 +34,7 @@ export default function ClientApp({ Component, pageProps }) {
         // Router change handlers.
         const handleRouteChangeStart = () => startNProgress();
 
-        const handleRouteChangeComplete = url => {
+        const handleRouteChangeComplete = (url) => {
             stopNProgress();
             setGoogleAnalyticsPagePath(url);
         };
@@ -75,4 +75,4 @@ export default function ClientApp({ Component, pageProps }) {
     );
 }
 
-Moment.globalFilter = dateStr => `${dateStr.charAt(0).toUpperCase()}${dateStr.slice(1)}`;
+Moment.globalFilter = (dateStr) => `${dateStr.charAt(0).toUpperCase()}${dateStr.slice(1)}`;

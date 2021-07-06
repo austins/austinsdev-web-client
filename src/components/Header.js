@@ -35,14 +35,14 @@ export default function Header() {
 
     const { data: headerMenuData } = useSWR(headerMenuQuery, graphqlFetcher, {
         revalidateOnMount: true,
-        onSuccess: fetchedHeaderMenuData =>
+        onSuccess: (fetchedHeaderMenuData) =>
             localStorage.setItem(headerMenuDataCacheKey, JSON.stringify(fetchedHeaderMenuData)),
     });
 
     let menuItems = get(headerMenuData ?? {}, 'menu.menuItems.nodes', []);
     if (menuItems.length) menuItems = mapMenuItemsChildrenToParents(menuItems);
 
-    const search = e => {
+    const search = (e) => {
         e.preventDefault();
 
         const searchValue = e.target.search.value.trim();
@@ -67,7 +67,7 @@ export default function Header() {
                     <Navbar.Collapse id="navbar-collapse">
                         <Nav className="me-auto">
                             {menuItems.length > 0 &&
-                                menuItems.map(menuItem => {
+                                menuItems.map((menuItem) => {
                                     if (!menuItem.children.length) {
                                         return (
                                             <HeaderMenuItemLink key={menuItem.id} href={menuItem.url}>
@@ -83,7 +83,7 @@ export default function Header() {
 
                                     return (
                                         <NavDropdown key={menuItem.id} id={menuItem.id} title={menuItem.label}>
-                                            {menuItem.children.map(childMenuItem => (
+                                            {menuItem.children.map((childMenuItem) => (
                                                 <HeaderMenuItemLink key={childMenuItem.id} href={childMenuItem.url}>
                                                     <NavDropdown.Item
                                                         target={childMenuItem.isExternal ? '_blank' : '_self'}
