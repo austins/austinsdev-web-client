@@ -2,7 +2,7 @@
 FROM node:lts-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
-COPY package-lock.json ./
+COPY package.json package-lock.json ./
 RUN npm ci
 
 # Rebuild the source code only when needed.
