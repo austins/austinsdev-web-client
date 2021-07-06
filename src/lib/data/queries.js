@@ -89,6 +89,7 @@ export const pageQuery = gql`
             content
             seo {
                 fullHead
+                opengraphDescription
             }
         }
     }
@@ -130,6 +131,9 @@ export const projectsQuery = gql`
 
 export const postsQuery = gql`
     query ($categorySlug: String, $authorSlug: String, $search: String, $size: Int!, $offset: Int) {
+        generalSettings {
+            description
+        }
         posts(
             where: {
                 status: PUBLISH
@@ -217,6 +221,7 @@ export const postQuery = gql`
             }
             seo {
                 fullHead
+                opengraphDescription
             }
         }
     }
