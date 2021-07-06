@@ -4,6 +4,7 @@
 !*.ts
 !*.jsx
 !*.tsx
+/node_modules
 /.next
 /out
 /build
