@@ -11,12 +11,7 @@
         "operator-assignment": "warn",
         "prettier/prettier": [
             "error",
-            {
-                "arrowParens": "always",
-                "endOfLine": "lf",
-                "singleQuote": true,
-                "tabWidth": 4
-            }
+            { "arrowParens": "always", "endOfLine": "lf", "singleQuote": true, "trailingComma": "es5" }
         ],
         "react/no-danger": "off",
         "sort-keys": "off"
