@@ -1,20 +1,20 @@
-import { Badge, Button, Card, Col, Nav, Row } from 'react-bootstrap';
-import { useState } from 'react';
-import Image from 'next/image';
-import styles from '../styles/Projects.module.scss';
+import { Badge, Button, Card, Col, Nav, Row } from "react-bootstrap";
+import { useState } from "react";
+import Image from "next/image";
+import styles from "../styles/Projects.module.scss";
 
 export default function Projects({ projects }) {
-    const defaultCategory = { eventKey: 'all', name: 'All' };
+    const defaultCategory = { eventKey: "all", name: "All" };
     const [currentCategoryEventKey, setCurrentCategoryEventKey] = useState(defaultCategory.eventKey);
 
     const categories = projects
-        .map(project => project.projectCategories.nodes[0].name)
+        .map((project) => project.projectCategories.nodes[0].name)
         .filter((v, i, a) => a.indexOf(v) === i)
         .sort();
 
     const displayedProjects =
         currentCategoryEventKey !== defaultCategory.eventKey
-            ? projects.filter(project => project.projectCategories.nodes[0].name === currentCategoryEventKey)
+            ? projects.filter((project) => project.projectCategories.nodes[0].name === currentCategoryEventKey)
             : projects;
 
     return (
@@ -25,15 +25,15 @@ export default function Projects({ projects }) {
                 <Nav.Item>
                     <Nav.Link
                         eventKey={defaultCategory.eventKey}
-                        onSelect={eventKey => setCurrentCategoryEventKey(eventKey)}
+                        onSelect={(eventKey) => setCurrentCategoryEventKey(eventKey)}
                     >
                         {defaultCategory.name}
                     </Nav.Link>
                 </Nav.Item>
 
-                {categories.map(category => (
+                {categories.map((category) => (
                     <Nav.Item key={category}>
-                        <Nav.Link eventKey={category} onSelect={eventKey => setCurrentCategoryEventKey(eventKey)}>
+                        <Nav.Link eventKey={category} onSelect={(eventKey) => setCurrentCategoryEventKey(eventKey)}>
                             {category}
                         </Nav.Link>
                     </Nav.Item>
@@ -41,7 +41,7 @@ export default function Projects({ projects }) {
             </Nav>
 
             <div>
-                {displayedProjects.map(project => (
+                {displayedProjects.map((project) => (
                     <Card
                         key={project.id}
                         className={`w-100 pb-4 mt-4 border-top-0 border-start-0 border-end-0 border-bottom shadow-none ${styles.projectCard}`}
@@ -63,7 +63,7 @@ export default function Projects({ projects }) {
                             )}
 
                             <Col md>
-                                <Card.Body className={`pb-0 px-0${project.featuredImage ? ' pt-md-0' : ' pt-0'}`}>
+                                <Card.Body className={`pb-0 px-0${project.featuredImage ? " pt-md-0" : " pt-0"}`}>
                                     <h5>{project.title}</h5>
                                     <div>
                                         <Badge bg="dark" className={`me-2 font-weight-bold ${styles.projectTag}`}>
@@ -71,7 +71,7 @@ export default function Projects({ projects }) {
                                         </Badge>
 
                                         {project.projectTags.nodes.length > 0 &&
-                                            project.projectTags.nodes.map(tag => (
+                                            project.projectTags.nodes.map((tag) => (
                                                 <Badge
                                                     key={tag.id}
                                                     bg="info"

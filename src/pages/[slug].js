@@ -1,10 +1,10 @@
-import Projects from '../components/Projects';
-import HeadWithTitle from '../components/HeadWithTitle';
-import { pagePathsQuery, pageQuery, projectsQuery } from '../lib/data/queries';
-import { graphqlFetcher } from '../lib/data/fetchers';
-import Page from '../components/Page';
+import Projects from "../components/Projects";
+import HeadWithTitle from "../components/HeadWithTitle";
+import { pagePathsQuery, pageQuery, projectsQuery } from "../lib/data/queries";
+import { graphqlFetcher } from "../lib/data/fetchers";
+import Page from "../components/Page";
 
-const portfolioSlug = 'portfolio';
+const portfolioSlug = "portfolio";
 
 export default function SinglePage({ pageData, projectsData }) {
     const { page } = pageData;
@@ -45,9 +45,9 @@ export async function getStaticPaths() {
 
     const pages = pageData.pages.nodes;
 
-    const paths = pages.map(page => ({
+    const paths = pages.map((page) => ({
         params: { slug: page.slug },
     }));
 
-    return { fallback: 'blocking', paths };
+    return { fallback: "blocking", paths };
 }

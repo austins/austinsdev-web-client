@@ -1,0 +1,10 @@
+*
+!/**/
+!*.js
+!*.ts
+!*.jsx
+!*.tsx
+/.next
+/out
+/build
+package-lock.json
