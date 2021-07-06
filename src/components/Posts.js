@@ -14,7 +14,7 @@ export default function Posts({ authorName, categoryName, posts, search }) {
                 (search && <h1>Search: {search}</h1>)}
 
             <Row xs="1" sm="2" lg="3" className="g-4">
-                {posts.map((post) => {
+                {posts.map(post => {
                     const date = new Date(`${post.dateGmt}Z`);
                     const link = `/article/${date.getUTCFullYear()}/${post.slug}`;
 

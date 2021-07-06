@@ -45,7 +45,7 @@ export async function getStaticPaths() {
 
     const pages = pageData.pages.nodes;
 
-    const paths = pages.map((page) => ({
+    const paths = pages.map(page => ({
         params: { slug: page.slug },
     }));
 

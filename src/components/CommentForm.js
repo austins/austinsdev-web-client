@@ -25,7 +25,7 @@ export default function CommentForm({
     const [submitCommentError, setSubmitCommentError] = useState('');
     const [createdCommentId, setCreatedCommentId] = useState(null);
 
-    const submitComment = (e) => {
+    const submitComment = e => {
         e.preventDefault();
 
         fetch('/api/comments', {
@@ -39,8 +39,8 @@ export default function CommentForm({
                 parentDatabaseId: replyToCommentMetadata ? replyToCommentMetadata.databaseId : null,
             }),
         })
-            .then((res) => res.json())
-            .then(async (data) => {
+            .then(res => res.json())
+            .then(async data => {
                 if (data.error) {
                     setSubmitCommentError(data.error.message);
                     setSubmitCommentSuccess(false);
@@ -62,7 +62,7 @@ export default function CommentForm({
                         postDataCopy.post.comments.edges.push({ node: comment });
                     } else {
                         const parentCommentIndex = postDataCopy.post.comments.edges.findIndex(
-                            (c) => c.node.id === comment.parentId
+                            c => c.node.id === comment.parentId
                         );
 
                         postDataCopy.post.comments.edges[parentCommentIndex].node.replies.edges.push({
@@ -129,7 +129,7 @@ export default function CommentForm({
                                         <Form.Control
                                             type="text"
                                             value={commentFormName}
-                                            onChange={(e) => setCommentFormName(e.target.value)}
+                                            onChange={e => setCommentFormName(e.target.value)}
                                             required
                                         />
                                     </Form.Group>
@@ -140,7 +140,7 @@ export default function CommentForm({
                                         <Form.Control
                                             type="email"
                                             value={commentFormEmail}
-                                            onChange={(e) => setCommentFormEmail(e.target.value)}
+                                            onChange={e => setCommentFormEmail(e.target.value)}
                                             required
                                         />
                                     </Form.Group>
@@ -153,7 +153,7 @@ export default function CommentForm({
                                     as="textarea"
                                     style={{ height: '100px' }}
                                     value={commentFormMessage}
-                                    onChange={(e) => setCommentFormMessage(e.target.value)}
+                                    onChange={e => setCommentFormMessage(e.target.value)}
                                     required
                                 />
                             </Form.Group>

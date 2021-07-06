@@ -22,7 +22,7 @@ export async function getServerSideProps({ req, res }) {
         updated: posts.length ? new Date(`${posts[0].dateGmt}Z`) : null,
     });
 
-    posts.forEach((post) => {
+    posts.forEach(post => {
         const postDate = new Date(`${post.dateGmt}Z`);
         const postLink = new URL(`/article/${postDate.getUTCFullYear()}/${post.slug}`, siteLink).href;
 

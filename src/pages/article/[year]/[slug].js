@@ -10,7 +10,7 @@ import { postQuery, postPathsQuery } from '../../../lib/data/queries';
 import { graphqlFetcher } from '../../../lib/data/fetchers';
 import Post from '../../../components/Post';
 
-const getPostQueryVars = memoize((slug) => ({ slug }));
+const getPostQueryVars = memoize(slug => ({ slug }));
 
 export default function SinglePost({ slug, initialPostData }) {
     const isCommentStatusOpen = initialPostData.post.commentStatus === 'open';
@@ -65,7 +65,7 @@ export async function getStaticPaths() {
 
     const posts = postsData.posts.nodes;
 
-    const paths = posts.map((post) => {
+    const paths = posts.map(post => {
         const pathSplit = post.uri.split('/');
         const year = pathSplit[2];
         const slug = pathSplit[3];

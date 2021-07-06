@@ -38,7 +38,7 @@ export default function Comments({ isCommentStatusOpen, postData, postMutate }) 
             );
         }
 
-        const getAuthorLink = (showAvatar) => {
+        const getAuthorLink = showAvatar => {
             const authorLinkDisplay = showAvatar ? <Image {...avatarProps} /> : author.name;
 
             if (has(author, 'slug') && has(author, 'posts.nodes[0].id')) {
@@ -112,8 +112,7 @@ export default function Comments({ isCommentStatusOpen, postData, postMutate }) 
                     </div>
                 </div>
 
-                {childComments.length > 0 &&
-                    childComments.map((childComment) => renderComment(childComment, level + 1))}
+                {childComments.length > 0 && childComments.map(childComment => renderComment(childComment, level + 1))}
             </Fragment>
         );
     };
@@ -122,7 +121,7 @@ export default function Comments({ isCommentStatusOpen, postData, postMutate }) 
         <section id="comments">
             <h3>Comments</h3>
 
-            {displayedComments.length > 0 && <div>{displayedComments.map((comment) => renderComment(comment, 1))}</div>}
+            {displayedComments.length > 0 && <div>{displayedComments.map(comment => renderComment(comment, 1))}</div>}
 
             <CommentForm
                 isCommentStatusOpen={isCommentStatusOpen}
