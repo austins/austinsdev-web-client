@@ -1,7 +1,7 @@
 import isInt from "validator/lib/isInt";
 import { useEffect } from "react";
 import Prism from "prismjs";
-import has from "lodash/has";
+import { has } from "lodash";
 import useSWR from "swr";
 import memoize from "fast-memoize";
 import HeadWithTitle from "../../../components/HeadWithTitle";
