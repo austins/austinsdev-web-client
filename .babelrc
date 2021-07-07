@@ -1,24 +1,18 @@
 {
     "presets": ["next/babel"],
     "plugins": [
+        "lodash",
         ["prismjs", {
             "languages": [
                 "js",
                 "css",
                 "html",
-                "aspnet",
                 "c",
                 "csharp",
-                "git",
                 "php",
                 "json",
-                "nginx",
-                "mongodb",
                 "powershell",
-                "scss",
-                "sql",
-                "vbnet",
-                "vb"
+                "bash"
             ],
             "plugins": ["show-language"],
             "theme": "default",
