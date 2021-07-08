@@ -5,10 +5,12 @@ import { has } from "lodash";
 import useSWR from "swr";
 import memoize from "fast-memoize";
 import HeadWithTitle from "../../../components/HeadWithTitle";
-import Comments from "../../../components/Comments";
 import { postPathsQuery, postQuery } from "../../../lib/data/queries";
 import { graphqlFetcher } from "../../../lib/data/fetchers";
 import Post from "../../../components/Post";
+import dynamic from "next/dynamic";
+
+const Comments = dynamic(() => import("../../../components/Comments"));
 
 const getPostQueryVars = memoize((slug) => ({ slug }));
 
