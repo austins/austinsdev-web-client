@@ -29,7 +29,7 @@ export default function Posts({ authorName, categoryName, posts, search }) {
                                                     className={styles.postThumbnail}
                                                     placeholder="blur"
                                                     blurDataURL={post.featuredImage.node.blurDataURL}
-                                                    src={post.featuredImage.node.mediaItemUrl}
+                                                    src={post.featuredImage.node.sourceUrl}
                                                     alt={post.title}
                                                     quality={100}
                                                     layout="fill"

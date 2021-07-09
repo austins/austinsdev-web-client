@@ -172,7 +172,7 @@ export const postsQuery = gql`
                     }
                     featuredImage {
                         node {
-                            mediaItemUrl
+                            sourceUrl(size: THUMBNAIL)
                         }
                     }
                 }
