@@ -52,7 +52,7 @@ export default function Projects({ projects }) {
                                     <div className={styles.projectThumbnailContainer}>
                                         <Card.Img
                                             as={Image}
-                                            src={project.featuredImage.node.mediaItemUrl}
+                                            src={project.featuredImage.node.sourceUrl}
                                             alt={project.title}
                                             quality={100}
                                             layout="fill"

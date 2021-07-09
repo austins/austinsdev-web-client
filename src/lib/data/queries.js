@@ -104,7 +104,7 @@ export const projectsQuery = gql`
                 title
                 featuredImage {
                     node {
-                        mediaItemUrl
+                        sourceUrl(size: THUMBNAIL)
                     }
                 }
                 project {
