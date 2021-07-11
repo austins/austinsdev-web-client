@@ -130,7 +130,14 @@ export const projectsQuery = gql`
 `;
 
 export const postsQuery = gql`
-    query ($categorySlug: String, $authorSlug: String, $search: String, $size: Int!, $offset: Int) {
+    query (
+        $categorySlug: String
+        $authorSlug: String
+        $search: String
+        $size: Int!
+        $offset: Int
+        $withContent: Boolean = false
+    ) {
         generalSettings {
             description
         }
@@ -157,6 +164,7 @@ export const postsQuery = gql`
                     dateGmt
                     title
                     excerpt
+                    content @include(if: $withContent)
                     author {
                         node {
                             name
