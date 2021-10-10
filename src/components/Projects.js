@@ -21,21 +21,18 @@ export default function Projects({ projects }) {
         <section>
             <h2>Projects</h2>
 
-            <Nav variant="tabs" defaultActiveKey={defaultCategory.eventKey}>
+            <Nav
+                variant="tabs"
+                defaultActiveKey={defaultCategory.eventKey}
+                onSelect={(selectedEventKey) => setCurrentCategoryEventKey(selectedEventKey)}
+            >
                 <Nav.Item>
-                    <Nav.Link
-                        eventKey={defaultCategory.eventKey}
-                        onSelect={(eventKey) => setCurrentCategoryEventKey(eventKey)}
-                    >
-                        {defaultCategory.name}
-                    </Nav.Link>
+                    <Nav.Link eventKey={defaultCategory.eventKey}>{defaultCategory.name}</Nav.Link>
                 </Nav.Item>
 
                 {categories.map((category) => (
                     <Nav.Item key={category}>
-                        <Nav.Link eventKey={category} onSelect={(eventKey) => setCurrentCategoryEventKey(eventKey)}>
-                            {category}
-                        </Nav.Link>
+                        <Nav.Link eventKey={category}>{category}</Nav.Link>
                     </Nav.Item>
                 ))}
             </Nav>
