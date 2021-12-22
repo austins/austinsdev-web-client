@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import Prism from "prismjs";
 import { has } from "lodash";
 import useSWR from "swr";
-import memoize from "fast-memoize";
 import HeadWithTitle from "../../../components/HeadWithTitle";
 import { postPathsQuery, postQuery } from "../../../lib/data/queries";
 import { graphqlFetcher } from "../../../lib/data/fetchers";
@@ -12,7 +11,7 @@ import dynamic from "next/dynamic";
 
 const Comments = dynamic(() => import("../../../components/Comments"));
 
-const getPostQueryVars = memoize((slug) => ({ slug }));
+const getPostQueryVars = (slug) => ({ slug });
 
 export default function SinglePost({ slug, fallbackPostData }) {
     const isCommentStatusOpen = fallbackPostData.post.commentStatus === "open";
