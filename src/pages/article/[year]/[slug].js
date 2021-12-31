@@ -6,7 +6,6 @@ import { postPathsQuery, postQuery } from '../../../lib/data/queries';
 import { graphqlFetcher } from '../../../lib/data/fetchers';
 import Post from '../../../components/Post';
 import dynamic from 'next/dynamic';
-import Script from 'next/script';
 
 const Comments = dynamic(() => import("../../../components/Comments"));
 
@@ -41,17 +40,23 @@ export default function SinglePost({ slug, fallbackPostData }) {
                     crossOrigin="anonymous"
                     referrerPolicy="no-referrer"
                 />
+
+                <script
+                    defer
+                    src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-core.min.js"
+                    integrity="sha512-TbHaMJHEmRBDf9W3P7VcRGwEmVEJu7MO6roAE0C4yqoNHeIVo3otIX3zj1DOLtn7YCD+U8Oy1T9eMtG/M9lxRw=="
+                    crossOrigin="anonymous"
+                    referrerPolicy="no-referrer"
+                />
+
+                <script
+                    defer
+                    src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js"
+                    integrity="sha512-sv0slik/5O0JIPdLBCR2A3XDg/1U3WuDEheZfI/DI5n8Yqc3h5kjrnr46FGBNiUAJF7rE4LHKwQ/SoSLRKAxEA=="
+                    crossOrigin="anonymous"
+                    referrerPolicy="no-referrer"
+                />
             </HeadWithTitle>
-
-            <Script
-                src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-core.min.js"
-                strategy="afterInteractive"
-            />
-
-            <Script
-                src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js"
-                strategy="afterInteractive"
-            />
 
             <Post post={post} parseContent />
 
