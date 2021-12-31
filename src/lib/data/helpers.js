@@ -1,6 +1,8 @@
 import parse, { attributesToProps } from "html-react-parser";
 import Image from "next/image";
-import { has, pick, isString } from "lodash";
+import has from "lodash/has";
+import pick from "lodash/pick";
+import isString from "lodash/isString";
 
 export function flattenEdges(data) {
     return data.edges.reduce((accumulator, obj) => {

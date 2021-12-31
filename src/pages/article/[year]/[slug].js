@@ -1,13 +1,12 @@
-import isInt from "validator/lib/isInt";
-import { useEffect } from "react";
-import Prism from "prismjs";
-import { has } from "lodash";
-import useSWR from "swr";
-import HeadWithTitle from "../../../components/HeadWithTitle";
-import { postPathsQuery, postQuery } from "../../../lib/data/queries";
-import { graphqlFetcher } from "../../../lib/data/fetchers";
-import Post from "../../../components/Post";
-import dynamic from "next/dynamic";
+import isInt from 'validator/lib/isInt';
+import has from 'lodash/has';
+import useSWR from 'swr';
+import HeadWithTitle from '../../../components/HeadWithTitle';
+import { postPathsQuery, postQuery } from '../../../lib/data/queries';
+import { graphqlFetcher } from '../../../lib/data/fetchers';
+import Post from '../../../components/Post';
+import dynamic from 'next/dynamic';
+import Script from 'next/script';
 
 const Comments = dynamic(() => import("../../../components/Comments"));
 
@@ -20,10 +19,6 @@ export default function SinglePost({ slug, fallbackPostData }) {
         fallbackData: fallbackPostData,
         revalidateOnMount: isCommentStatusOpen, // Since we have Incremental Static Regeneration, the page may be cached, so we should refetch the latest comments data.
     });
-
-    useEffect(() => {
-        Prism.highlightAll();
-    }, []);
 
     // Disable error checking for now since revalidateOnMount causes error to be thrown on fast refreshes.
     // if (error) return <Error statusCode={error.statusCode} />;
@@ -38,7 +33,24 @@ export default function SinglePost({ slug, fallbackPostData }) {
             <HeadWithTitle
                 title={post.title}
                 description={post.seo.opengraphDescription}
-                innerHTMLString={post.seo.fullHead}
+                innerHTMLString={post.seo.fullHead}>
+                <link
+                    rel="stylesheet"
+                    href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+                    integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ=="
+                    crossOrigin="anonymous"
+                    referrerPolicy="no-referrer"
+                />
+            </HeadWithTitle>
+
+            <Script
+                src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-core.min.js"
+                strategy="afterInteractive"
+            />
+
+            <Script
+                src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js"
+                strategy="afterInteractive"
             />
 
             <Post post={post} parseContent />
