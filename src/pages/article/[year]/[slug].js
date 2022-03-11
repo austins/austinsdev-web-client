@@ -1,11 +1,11 @@
-import isInt from 'validator/lib/isInt';
-import has from 'lodash/has';
-import useSWR from 'swr';
-import HeadWithTitle from '../../../components/HeadWithTitle';
-import { postPathsQuery, postQuery } from '../../../lib/data/queries';
-import { graphqlFetcher } from '../../../lib/data/fetchers';
-import Post from '../../../components/Post';
-import dynamic from 'next/dynamic';
+import isInt from "validator/lib/isInt";
+import has from "lodash/has";
+import useSWR from "swr";
+import HeadWithTitle from "../../../components/HeadWithTitle";
+import { postPathsQuery, postQuery } from "../../../lib/data/queries";
+import { graphqlFetcher } from "../../../lib/data/fetchers";
+import Post from "../../../components/Post";
+import dynamic from "next/dynamic";
 
 const Comments = dynamic(() => import("../../../components/Comments"));
 
@@ -32,7 +32,8 @@ export default function SinglePost({ slug, fallbackPostData }) {
             <HeadWithTitle
                 title={post.title}
                 description={post.seo.opengraphDescription}
-                innerHTMLString={post.seo.fullHead}>
+                innerHTMLString={post.seo.fullHead}
+            >
                 <link
                     rel="stylesheet"
                     href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
